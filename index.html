@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IEEE Oriental University Student Branch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+    /* ===================== */
+    /* RESET                 */
+    /* ===================== */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: #102041;
+      background: #f8fafc;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 {
+      margin: 0;
+      color: var(--color-primary);
+      letter-spacing: -0.03em;
+    }
+    h2 {
+      font-size: clamp(2rem, 2.5vw, 2.75rem);
+    }
+    h3 {
+      font-size: 1.15rem;
+    }
+    p {
+      margin: 0;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    button, input, textarea, select {
+      font: inherit;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    /* ===================== */
+    /* TOKENS                */
+    /* ===================== */
+
+    :root {
+      --color-bg: #f7f9fb;
+      --color-surface: #ffffff;
+      --color-primary: #002B5C;
+      --color-primary-strong: #001E42;
+      --color-secondary: #F4C300;
+      --color-muted: #5f6d7d;
+      --color-border: #dde2e8;
+      --color-muted-bg: #eef2f8;
+      --color-inverse: #ffffff;
+      --radius: 1rem;
+      --radius-sm: 0.75rem;
+      --shadow: 0 18px 40px rgba(0,43,92,0.12);
+      --shadow-soft: 0 10px 24px rgba(0,43,92,0.06);
+      --transition: 180ms ease;
+      --max-content-width: 1180px;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2.5rem;
+      --spacing-xl: 4rem;
+    }
+
+    /* ===================== */
+    /* LAYOUT UTILITIES      */
+    /* ===================== */
+
+    .container {
+      width: min(100% - 2rem, var(--max-content-width));
+      margin-inline: auto;
+    }
+    .section {
+      padding: var(--spacing-xl) 0;
+    }
+    .section-header {
+      max-width: 720px;
+      margin: 0 auto 2rem;
+      text-align: center;
+    }
+    .section-divider {
+      width: 7rem;
+      height: 4px;
+      background: var(--color-secondary);
+      border-radius: 999px;
+      margin: 1rem auto 0;
+    }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-secondary);
+      margin-bottom: 0.75rem;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ===================== */
+    /* BUTTON                */
+    /* ===================== */
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.95rem 1.75rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      transition: transform var(--transition), background var(--transition), color var(--transition);
+    }
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-1px);
+    }
+    .button--primary {
+      background: var(--color-primary);
+      color: var(--color-inverse);
+    }
+    .button--secondary {
+      background: var(--color-secondary);
+      color: var(--color-primary);
+    }
+    .button--secondary:hover,
+    .button--secondary:focus-visible {
+      background: #e6b800;
+    }
+
+    /* ===================== */
+    /* TOP BAR               */
+    /* ===================== */
+
+    .top-bar {
+      background: var(--color-primary);
+      color: var(--color-inverse);
+      font-size: 0.875rem;
+    }
+    .top-bar-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      gap: 0.75rem;
+    }
+    .top-bar-contact {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .top-bar-contact p {
+      margin: 0;
+    }
+    .top-bar-link {
+      background: var(--color-secondary);
+      color: var(--color-primary);
+      padding: 0.4rem 1.25rem;
+      font-weight: 600;
+      transition: opacity var(--transition);
+    }
+    .top-bar-link:hover {
+      opacity: 0.9;
+    }
+
+    /* ===================== */
+    /* SITE HEADER           */
+    /* ===================== */
+
+    .site-header {
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: 0 2px 8px rgba(0,43,92,0.04);
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+    }
+    .brand-logo img {
+      height: 6rem;
+      width: auto;
+      object-fit: contain;
+    }
+    .header-contact {
+      display: none;
+      gap: 2.5rem;
+      color: var(--color-primary);
+    }
+
+    /* ===================== */
+    /* NAVBAR                */
+    /* ===================== */
+
+    .site-nav {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .nav-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      padding: 1.25rem 0;
+      font-weight: 500;
+    }
+    .nav-link {
+      position: relative;
+      color: var(--color-primary);
+      transition: color var(--transition);
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 2px;
+      background: var(--color-secondary);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after {
+      width: 100%;
+    }
+
+    /* ===================== */
+    /* TOC BUTTON & DRAWER   */
+    /* ===================== */
+
+    .toc-trigger {
+      position: fixed;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 90;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      background: var(--color-primary);
+      color: var(--color-inverse);
+      padding: 1rem 0.6rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      box-shadow: var(--shadow-soft);
+      transition: background var(--transition), transform var(--transition);
+    }
+    .toc-trigger:hover {
+      background: var(--color-primary-strong);
+    }
+    .toc-trigger.is-open {
+      background: var(--color-primary-strong);
+    }
+
+    .toc-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      pointer-events: none;
+    }
+    .toc-drawer.is-open {
+      pointer-events: all;
+    }
+    .toc-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,30,66,0.55);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .toc-drawer.is-open .toc-backdrop {
+      opacity: 1;
+    }
+    .toc-panel {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: min(320px, 85vw);
+      background: var(--color-surface);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      padding: 2.5rem 2rem;
+      gap: 0.5rem;
+      transform: translateX(-100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .toc-drawer.is-open .toc-panel {
+      transform: translateX(0);
+    }
+    .toc-panel-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--color-muted);
+      margin-bottom: 1rem;
+    }
+    .toc-link {
+      display: block;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      color: var(--color-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background var(--transition), color var(--transition), padding-left var(--transition);
+      counter-increment: toc-item;
+    }
+    .toc-link::before {
+      content: counter(toc-item, decimal-leading-zero) " ";
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--color-secondary);
+      margin-right: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+    .toc-link:hover {
+      background: var(--color-muted-bg);
+      padding-left: 1.4rem;
+    }
+    .toc-panel-nav {
+      counter-reset: toc-item;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .toc-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-primary);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background var(--transition), color var(--transition);
+    }
+    .toc-close:hover {
+      background: var(--color-primary);
+      color: var(--color-inverse);
+    }
+
+    /* ===================== */
+    /* HERO SECTION          */
+    /* ===================== */
+
+    .hero-section {
+      position: relative;
+      padding: 2rem 0;
+    }
+    .hero-image-wrap {
+      position: relative;
+      border-radius: 2.5rem;
+      overflow: hidden;
+      height: 600px;
+      box-shadow: var(--shadow-soft);
+    }
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.65) saturate(0.95);
+      transition: transform 400ms ease, filter 300ms ease;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(0,43,92,0.72) 0%, rgba(0,43,92,0.36) 45%, rgba(0,43,92,0.18) 100%);
+      mix-blend-mode: multiply;
+    }
+    .hero-floating-card {
+      position: absolute;
+      bottom: -55px;
+      left: 8%;
+      background: var(--color-primary);
+      color: var(--color-inverse);
+      padding: 2rem 2.25rem;
+      border-radius: 1.25rem;
+      box-shadow: var(--shadow);
+      max-width: 520px;
+      transform-origin: left bottom;
+    }
+    .hero-floating-card h2 {
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      color: var(--color-inverse);
+      line-height: 1.05;
+    }
+
+    .hero-image-wrap:hover .hero-image {
+      transform: scale(1.03);
+      filter: brightness(0.7) saturate(1);
+    }
+
+    /* ===================== */
+    /* BREADCRUMB            */
+    /* ===================== */
+
+    .breadcrumb-section {
+      padding: 5rem 0 2.5rem;
+    }
+    .breadcrumb {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 1.1rem;
+      align-items: center;
+    }
+    .breadcrumb-link {
+      color: var(--color-muted);
+      transition: color var(--transition);
+    }
+    .breadcrumb-link:hover {
+      color: var(--color-primary);
+    }
+    .breadcrumb-current {
+      color: var(--color-secondary);
+      font-weight: 600;
+    }
+
+    /* ===================== */
+    /* GLANCE SECTION        */
+    /* ===================== */
+
+    .glance-section {
+      background: var(--color-primary);
+      padding: var(--spacing-xl) 0;
+    }
+    .glance-grid {
+      display: grid;
+      gap: 4rem;
+      align-items: center;
+    }
+    .glance-image {
+      width: 100%;
+      /* height: 620px; */
+      object-fit: contain;
+      border-radius: var(--radius);
+    }
+    .glance-copy {
+      color: var(--color-inverse);
+    }
+    .glance-copy h2 {
+      color: var(--color-inverse);
+      font-size: clamp(2rem, 3vw, 3rem);
+      margin-bottom: 1.5rem;
+    }
+    .glance-copy > p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .glance-scroll {
+      max-height: 430px;
+      overflow-y: auto;
+      padding-right: 1.5rem;
+    }
+    .glance-scroll::-webkit-scrollbar {
+      width: 8px;
+    }
+    .glance-scroll::-webkit-scrollbar-track {
+      background: #dbe2ea;
+      border-radius: 20px;
+    }
+    .glance-scroll::-webkit-scrollbar-thumb {
+      background: var(--color-secondary);
+      border-radius: 20px;
+    }
+    .glance-item {
+      display: flex;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .glance-item:last-child {
+      margin-bottom: 0;
+    }
+    .glance-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      flex-shrink: 0;
+      border-radius: 0.5rem;
+      background: var(--color-secondary);
+      color: var(--color-primary);
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+    }
+    .glance-item p {
+      line-height: 1.7;
+      font-size: 1.1rem;
+    }
+
+    /* ===================== */
+    /* ACCORDION             */
+    /* ===================== */
+
+    .accordion-section {
+      background: var(--color-surface);
+      padding: var(--spacing-lg) 0;
+    }
+    .accordion-wrap {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+    .accordion-trigger {
+      width: 100%;
+      background: var(--color-muted-bg);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .accordion-trigger:hover {
+      background: #e2e8f0;
+    }
+    .accordion-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--color-primary);
+    }
+    .accordion-arrow {
+      display: inline-block;
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--color-primary);
+      transition: transform 260ms ease;
+    }
+    .accordion-trigger[aria-expanded="true"] .accordion-arrow {
+      transform: rotate(180deg);
+    }
+    .accordion-content {
+      background: var(--color-bg);
+      overflow: hidden;
+      max-height: 0;
+      padding: 0 1.5rem;
+      opacity: 0;
+      transition: max-height 320ms ease, opacity 260ms ease, padding 260ms ease;
+    }
+    .accordion-content p {
+      color: var(--color-muted);
+      line-height: 1.9;
+    }
+    .accordion-content:not(.hidden) {
+      max-height: 640px; /* large enough for content */
+      padding: 2rem 1.5rem;
+      opacity: 1;
+    }
+
+    /* ===================== */
+    /* TEAM SECTION          */
+    /* ===================== */
+
+    .team-section {
+      background: var(--color-bg);
+      padding: var(--spacing-xl) 0 calc(var(--spacing-xl) + 1rem);
+    }
+
+    /* Faculty Cards */
+
+    .faculty-grid {
+      display: grid;
+      gap: 1.5rem;
+      max-width: 680px;
+      margin: 0 auto 3.5rem;
+    }
+    .faculty-card {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    .faculty-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow);
+    }
+    .faculty-card-strip {
+      height: 6px;
+      background: linear-gradient(90deg, var(--color-secondary), #e6a800);
+    }
+    .faculty-card-body {
+      padding: 1.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .faculty-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(0,43,92,0.07);
+      color: var(--color-primary);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Student Cards */
+
+    .team-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+    }
+    .team-divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--color-border);
+    }
+    .team-divider-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--color-muted);
+      white-space: nowrap;
+    }
+    .student-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+    .student-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .student-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 48px rgba(0,43,92,0.14);
+    }
+    .student-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: var(--color-secondary);
+      transition: width 0.35s ease;
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+    .student-card:hover::after {
+      width: 100%;
+    }
+    .student-card-body {
+      padding: 1.25rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+
+    /* Shared card elements */
+
+    .photo-ring {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--color-border);
+      box-shadow: 0 4px 12px rgba(0,43,92,0.08);
+      margin-bottom: 1rem;
+      flex-shrink: 0;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .photo-ring--sm {
+      width: 5rem;
+      height: 5rem;
+    }
+    .faculty-card:hover .photo-ring,
+    .student-card:hover .photo-ring {
+      border-color: var(--color-secondary);
+      box-shadow: 0 0 0 4px rgba(244,195,0,0.18);
+    }
+    .photo-ring img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .card-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.25rem;
+      line-height: 1.2;
+    }
+    .card-name--sm {
+      font-size: 0.95rem;
+    }
+    .card-role {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #b45309;
+      margin-bottom: 1rem;
+    }
+    .view-chip {
+      margin-top: auto;
+      display: inline-flex;
+      padding: 0.25rem 0.75rem;
+      background: var(--color-secondary);
+      color: var(--color-primary);
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 999px;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .faculty-card:hover .view-chip,
+    .student-card:hover .view-chip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===================== */
+    /* GLIMPSES SECTION      */
+    /* ===================== */
+
+    .glimpses-section {
+      background: var(--color-bg);
+      padding: var(--spacing-xl) 0;
+    }
+    .glimpses-slider {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      padding: 15px 0;
+    }
+    .glimpses-track {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+      animation: slideRight 25s linear infinite;
+    }
+    .glimpses-slider:hover .glimpses-track {
+      animation-play-state: paused;
+    }
+    .glimpses-card {
+      flex-shrink: 0;
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+    }
+    .glimpses-card img {
+      width: 320px;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .glimpses-card:hover img {
+      transform: scale(1.08);
+    }
+
+    @keyframes slideRight {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0%); }
+    }
+
+    /* ===================== */
+    /* CTA SECTION           */
+    /* ===================== */
+
+    .cta-section {
+      background: var(--color-primary);
+      padding: var(--spacing-xl) 0;
+      text-align: center;
+    }
+    .cta-section h2 {
+      color: var(--color-inverse);
+      font-size: clamp(2rem, 3vw, 3rem);
+      margin-bottom: 1.25rem;
+    }
+    .cta-section p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    /* ===================== */
+    /* SITE FOOTER           */
+    /* ===================== */
+
+    .site-footer {
+      background: var(--color-primary-strong);
+      color: var(--color-inverse);
+    }
+    .footer-inner {
+      padding: 3.5rem 0 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      gap: 2.5rem;
+    }
+    .footer-col h3 {
+      color: var(--color-inverse);
+      font-size: 1.1rem;
+      margin-bottom: 1.25rem;
+    }
+    .footer-col p,
+    .footer-col li {
+      color: rgba(255,255,255,0.65);
+      line-height: 1.8;
+    }
+    .footer-links-list {
+      display: grid;
+      gap: 0.5rem;
+    }
+    .footer-links-list a {
+      color: rgba(255,255,255,0.65);
+      transition: color var(--transition);
+    }
+    .footer-links-list a:hover {
+      color: var(--color-secondary);
+    }
+    .footer-brand-img {
+      margin-top: 1rem;
+      height: 2.5rem;
+      width: auto;
+      object-fit: contain;
+      background: rgba(255,255,255,0.1);
+      padding: 0.375rem;
+      border-radius: 0.375rem;
+    }
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      margin: 2.5rem 0 1.5rem;
+    }
+    .footer-copy {
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.875rem;
+    }
+
+    /* ===================== */
+    /* MODAL                 */
+    /* ===================== */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: rgba(0,30,66,0.75);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.is-visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-card {
+      background: var(--color-surface);
+      border-radius: 1.5rem;
+      max-width: min(90vw, 760px);
+      width: 100%;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transform: scale(0.95);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .modal-overlay.is-visible .modal-card {
+      transform: scale(1);
+      opacity: 1;
+    }
+    .modal-close {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      border: 1px solid rgba(0,43,92,0.12);
+      background: var(--color-surface);
+      color: var(--color-primary);
+      font-size: 1.25rem;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      z-index: 1;
+      transition: background var(--transition), color var(--transition);
+    }
+    .modal-close:hover {
+      background: var(--color-primary);
+      color: var(--color-inverse);
+    }
+    .modal-image-pane {
+      background: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      flex-shrink: 0;
+    }
+    .modal-photo-ring {
+      width: 11rem;
+      height: 11rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--color-secondary);
+      box-shadow: var(--shadow-soft);
+    }
+    .modal-photo-ring img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .modal-details {
+      padding: 2rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .modal-name {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .modal-designation {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #b45309;
+      margin-bottom: 0.25rem;
+    }
+    .modal-member-id {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-muted);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .modal-member-id span {
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+    .modal-quote-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-muted);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .modal-quote {
+      font-style: italic;
+      color: var(--color-muted);
+      border-left: 4px solid var(--color-secondary);
+      padding-left: 1rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .modal-social-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-muted);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .modal-social-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .modal-social-link {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: rgba(0,43,92,0.06);
+      color: var(--color-primary);
+      display: grid;
+      place-items: center;
+      transition: background var(--transition), color var(--transition);
+    }
+    .modal-social-link:hover {
+      background: var(--color-primary);
+      color: var(--color-inverse);
+    }
+    .modal-social-link svg {
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    /* ===================== */
+    /* RESPONSIVE            */
+    /* ===================== */
+
+    @media (min-width: 768px) {
+      .header-contact {
+        display: flex;
+      }
+      .glance-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .faculty-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .student-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .modal-card {
+        flex-direction: row;
+      }
+      .modal-image-pane {
+        width: 42%;
+      }
+      .modal-details {
+        width: 58%;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .student-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .footer-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hero-floating-card {
+        left: 1rem;
+        right: 1rem;
+        bottom: -40px;
+        padding: 1.5rem;
+      }
+      .breadcrumb-section {
+        padding-top: 4rem;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== -->
+  <!-- HERO SECTION          -->
+  <!-- ===================== -->
+
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-image-wrap">
+        <img src="hero.JPG" alt="IEEE Oriental University Student Branch" class="hero-image">
+        <div class="hero-overlay" aria-hidden="true"></div>
+      </div>
+      <div class="hero-floating-card">
+        <h2>IEEE Oriental University<br>Student Branch</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== -->
+  <!-- BREADCRUMB            -->
+  <!-- ===================== -->
+
+  <section class="breadcrumb-section">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="#" class="breadcrumb-link">Home</a>
+        <span aria-hidden="true">»</span>
+        <span class="breadcrumb-current">IEEE Oriental University Student Branch</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ===================== -->
+  <!-- IEEE AT A GLANCE      -->
+  <!-- ===================== -->
+
+  <section class="glance-section">
+    <div class="container">
+      <div class="glance-grid">
+
+        <div>
+          <img src="glance_section.png" alt="IEEE at a Glance" class="glance-image">
+        </div>
+
+        <div class="glance-copy">
+          <h2>IEEE at a Glance</h2>
+          <p>Career and Corporate Resource Centre</p>
+          <div class="glance-scroll">
+
+            <div class="glance-item">
+              <div class="glance-icon" aria-hidden="true">↗</div>
+              <p><strong>About IEEE –</strong> The Institute of Electrical and Electronics Engineers (IEEE) is one of the world's largest technical professional organizations dedicated to advancing technology for humanity.</p>
+            </div>
+
+            <div class="glance-item">
+              <div class="glance-icon" aria-hidden="true">↗</div>
+              <p><strong>History –</strong> Established in 1963 through the merger of AIEE and IRE, IEEE has become a global leader in engineering innovation.</p>
+            </div>
+
+            <div class="glance-item">
+              <div class="glance-icon" aria-hidden="true">↗</div>
+              <p><strong>Membership –</strong> IEEE provides networking opportunities, technical resources, certifications, publications, conferences, and professional growth.</p>
+            </div>
+
+            <div class="glance-item">
+              <div class="glance-icon" aria-hidden="true">↗</div>
+              <p><strong>Publications –</strong> IEEE publishes journals, magazines, conference proceedings, standards, and technical research papers across disciplines.</p>
+            </div>
+
+            <div class="glance-item">
+              <div class="glance-icon" aria-hidden="true">↗</div>
+              <p><strong>Conferences –</strong> IEEE sponsors thousands of conferences annually, enabling collaboration among researchers and professionals worldwide.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== -->
+  <!-- ABOUT ACCORDION       -->
+  <!-- ===================== -->
+
+  <section class="accordion-section">
+    <div class="container">
+      <div class="accordion-wrap">
+        <button class="accordion-trigger" onclick="toggleAccordion()" aria-expanded="false" aria-controls="accordionContent">
+          <span class="accordion-title">About IEEE Oriental University Student Branch (IEEE OU SB)</span>
+          <span class="accordion-arrow" id="accordionArrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
+            </svg>
+          </span>
+        </button>
+        <div class="accordion-content hidden" id="accordionContent">
+          <p>Welcome to the IEEE Student Branch at Oriental University. Established in 2023, we are a vibrant community of technologists, innovators, and future engineers. As a part of the world's largest technical professional organization, our mission is to foster technological innovation and excellence for the benefit of humanity.</p>
+          <br>
+          <p>We bridge the gap between academic theory and industry reality by providing students with hands-on technical experience, leadership opportunities, and a global professional network.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== -->
+  <!-- TEAM SECTION          -->
+  <!-- ===================== -->
+
+  <section id="team" class="team-section">
+    <div class="container">
+
+      <div class="section-header">
+        <p class="eyebrow">Our People</p>
+        <h2>Meet Our Dedicated Team</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <!-- Faculty Advisory -->
+
+      <p class="eyebrow" style="text-align:center; color:var(--color-muted); margin-bottom:1.5rem;">Faculty Advisory</p>
+
+      <div class="faculty-grid">
+
+        <div class="faculty-card" onclick="openTeamModal(0)" role="button" tabindex="0" aria-label="View profile of Prof. (Dr.) Dhruva Ghai">
+          <div class="faculty-card-strip"></div>
+          <div class="faculty-card-body">
+            <div class="photo-ring">
+              <img src="assets/images/team-1.jpg" alt="Prof. (Dr.) Dhruva Ghai">
+            </div>
+            <span class="faculty-badge">Faculty Sponsor</span>
+            <h3 class="card-name">Prof. (Dr.) Dhruva Ghai</h3>
+            <p class="card-role" style="margin-bottom:0;">Advisor</p>
+            <span class="view-chip" style="margin-top:1rem;">View Profile →</span>
+          </div>
+        </div>
+
+        <div class="faculty-card" onclick="openTeamModal(1)" role="button" tabindex="0" aria-label="View profile of Placeholder Patel">
+          <div class="faculty-card-strip"></div>
+          <div class="faculty-card-body">
+            <div class="photo-ring">
+              <img src="assets/images/team-2.jpg" alt="Placeholder Patel">
+            </div>
+            <span class="faculty-badge">Faculty Advisor</span>
+            <h3 class="card-name">Placeholder Patel</h3>
+            <p class="card-role" style="margin-bottom:0;">Branch Counselor</p>
+            <span class="view-chip" style="margin-top:1rem;">View Profile →</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Divider -->
+
+      <div class="team-divider">
+        <div class="team-divider-line"></div>
+        <span class="team-divider-label">Student Executive Committee</span>
+        <div class="team-divider-line"></div>
+      </div>
+
+      <!-- Student Executive Grid -->
+
+      <div class="student-grid">
+
+        <div class="student-card" onclick="openTeamModal(2)" role="button" tabindex="0" aria-label="View profile of Aaditya Sinha">
+          <div class="student-card-body">
+            <div class="photo-ring photo-ring--sm">
+              <img src="assets/images/team-3.jpg" alt="Aaditya Sinha">
+            </div>
+            <h3 class="card-name card-name--sm">Aaditya Sinha</h3>
+            <p class="card-role">Chairperson</p>
+            <span class="view-chip">View →</span>
+          </div>
+        </div>
+
+        <div class="student-card" onclick="openTeamModal(3)" role="button" tabindex="0" aria-label="View profile of Goli Shregna">
+          <div class="student-card-body">
+            <div class="photo-ring photo-ring--sm">
+              <img src="Goli_Shregna.jpeg" alt="Goli Shregna">
+            </div>
+            <h3 class="card-name card-name--sm">Goli Shregna</h3>
+            <p class="card-role">Vice-Chairperson</p>
+            <span class="view-chip">View →</span>
+          </div>
+        </div>
+
+        <div class="student-card" onclick="openTeamModal(4)" role="button" tabindex="0" aria-label="View profile of Sheikh Shamim">
+          <div class="student-card-body">
+            <div class="photo-ring photo-ring--sm">
+              <img src="Sheikh_Shamim.jpeg" alt="Sheikh Shamim">
+            </div>
+            <h3 class="card-name card-name--sm">Sheikh Shamim</h3>
+            <p class="card-role">Treasurer</p>
+            <span class="view-chip">View →</span>
+          </div>
+        </div>
+
+        <div class="student-card" onclick="openTeamModal(5)" role="button" tabindex="0" aria-label="View profile of Vishwakarma Babitha">
+          <div class="student-card-body">
+            <div class="photo-ring photo-ring--sm">
+              <img src="Babitha_Vishwakarma.jpeg" alt="Vishwakarma Babitha">
+            </div>
+            <h3 class="card-name card-name--sm">Vishwakarma Babitha</h3>
+            <p class="card-role">Secretary</p>
+            <span class="view-chip">View →</span>
+          </div>
+        </div>
+
+        <div class="student-card" onclick="openTeamModal(6)" role="button" tabindex="0" aria-label="View profile of Saakshi Patel">
+          <div class="student-card-body">
+            <div class="photo-ring photo-ring--sm">
+              <img src="Sakshi_Patel.jpeg" alt="Saakshi Patel">
+            </div>
+            <h3 class="card-name card-name--sm">Saakshi Patel</h3>
+            <p class="card-role">Technical Committee Member</p>
+            <span class="view-chip">View →</span>
+          </div>
+        </div>
+
+        <div class="student-card" onclick="openTeamModal(7)" role="button" tabindex="0" aria-label="View profile of Godepally Naveen">
+          <div class="student-card-body">
+            <div class="photo-ring photo-ring--sm">
+              <img src="Godepally_Naveen.jpeg" alt="Godepally Naveen">
+            </div>
+            <h3 class="card-name card-name--sm">Godepally Naveen</h3>
+            <p class="card-role">Photography</p>
+            <span class="view-chip">View →</span>
+          </div>
+        </div>
+
+        <div class="student-card" onclick="openTeamModal(8)" role="button" tabindex="0" aria-label="View profile of Jay Agrawal">
+          <div class="student-card-body">
+            <div class="photo-ring photo-ring--sm">
+              <img src="Jay_Agrawal.jpeg" alt="Jay Agrawal">
+            </div>
+            <h3 class="card-name card-name--sm">Jay Agrawal</h3>
+            <p class="card-role">Social Media Committee</p>
+            <span class="view-chip">View →</span>
+          </div>
+        </div>
+
+        <div class="student-card" onclick="openTeamModal(9)" role="button" tabindex="0" aria-label="View profile of Vedant Dhangar">
+          <div class="student-card-body">
+            <div class="photo-ring photo-ring--sm">
+              <img src="Vedant_Dhangar.jpeg" alt="Vedant Dhangar">
+            </div>
+            <h3 class="card-name card-name--sm">Vedant Dhangar</h3>
+            <p class="card-role">Web Committee Member</p>
+            <span class="view-chip">View →</span>
+          </div>
+        </div>
+
+        <div class="student-card" onclick="openTeamModal(10)" role="button" tabindex="0" aria-label="View profile of Ranjana Patel">
+          <div class="student-card-body">
+            <div class="photo-ring photo-ring--sm">
+              <img src="Ranjana_Patel.jpeg" alt="Ranjana Patel">
+            </div>
+            <h3 class="card-name card-name--sm">Ranjana Patel</h3>
+            <p class="card-role">Social Media Committee</p>
+            <span class="view-chip">View →</span>
+          </div>
+        </div>
+
+        <div class="student-card" onclick="openTeamModal(11)" role="button" tabindex="0" aria-label="View profile of Sooraj Pandey">
+          <div class="student-card-body">
+            <div class="photo-ring photo-ring--sm">
+              <img src="assets/images/team-4.jpg" alt="Sooraj Pandey">
+            </div>
+            <h3 class="card-name card-name--sm">Sooraj Pandey</h3>
+            <p class="card-role">Web Committee Member</p>
+            <span class="view-chip">View →</span>
+          </div>
+        </div>
+
+        <div class="student-card" onclick="openTeamModal(12)" role="button" tabindex="0" aria-label="View profile of Apoorva Tiwari">
+          <div class="student-card-body">
+            <div class="photo-ring photo-ring--sm">
+              <img src="Apoorva_Tiwari.jpeg" alt="Apoorva Tiwari">
+            </div>
+            <h3 class="card-name card-name--sm">Apoorva Tiwari</h3>
+            <p class="card-role">Web Committee Member</p>
+            <span class="view-chip">View →</span>
+          </div>
+        </div>
+
+        <div class="student-card" onclick="openTeamModal(13)" role="button" tabindex="0" aria-label="View profile of Arman Chandravanshi">
+          <div class="student-card-body">
+            <div class="photo-ring photo-ring--sm">
+              <img src="Arman_Chandravanshi.jpeg" alt="Arman Chandravanshi">
+            </div>
+            <h3 class="card-name card-name--sm">Arman Chandravanshi</h3>
+            <p class="card-role">Technical Committee Member</p>
+            <span class="view-chip">View →</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== -->
+  <!-- GLIMPSES SECTION      -->
+  <!-- ===================== -->
+
+  <section class="glimpses-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Glimpses</h2>
+        <div class="section-divider"></div>
+      </div>
+    </div>
+    <div class="glimpses-slider">
+      <div class="glimpses-track">
+        <div class="glimpses-card"><img src="assets/images/gallery-1.jpg" alt="Event glimpse"></div>
+        <div class="glimpses-card"><img src="assets/images/gallery-2.jpg" alt="Event glimpse"></div>
+        <div class="glimpses-card"><img src="assets/images/gallery-3.jpg" alt="Event glimpse"></div>
+        <div class="glimpses-card"><img src="assets/images/gallery-4.jpg" alt="Event glimpse"></div>
+        <!-- Duplicated for seamless loop -->
+        <div class="glimpses-card"><img src="assets/images/gallery-1.jpg" alt="Event glimpse"></div>
+        <div class="glimpses-card"><img src="assets/images/gallery-2.jpg" alt="Event glimpse"></div>
+        <div class="glimpses-card"><img src="assets/images/gallery-3.jpg" alt="Event glimpse"></div>
+        <div class="glimpses-card"><img src="assets/images/gallery-4.jpg" alt="Event glimpse"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== -->
+  <!-- CTA SECTION           -->
+  <!-- ===================== -->
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Join IEEE OU Student Branch</h2>
+      <p>Connect with innovators, participate in technical events, build leadership skills, and become a part of the world's largest professional technical organization.</p>
+      <a href="#" class="button button--secondary">Become a Member</a>
+    </div>
+  </section>
+
+  <!-- ===================== -->
+  <!-- TEAM MODAL            -->
+  <!-- ===================== -->
+
+  <div id="teamModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalName">
+    <div id="modalCard" class="modal-card">
+
+      <button class="modal-close" onclick="closeTeamModal()" aria-label="Close modal">
+        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" width="20" height="20">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <div class="modal-image-pane">
+        <div class="modal-photo-ring">
+          <img id="modalImage" src="" alt="">
+        </div>
+      </div>
+
+      <div class="modal-details">
+        <div>
+          <h3 id="modalName" class="modal-name"></h3>
+          <p id="modalDesignation" class="modal-designation"></p>
+          <p class="modal-member-id">Member ID: <span id="modalMemberId"></span></p>
+          <p class="modal-quote-label">Inspirational Quote</p>
+          <blockquote class="modal-quote">&ldquo;<span id="modalQuote"></span>&rdquo;</blockquote>
+        </div>
+        <div>
+          <p class="modal-social-label">Connect With Them</p>
+          <div class="modal-social-links">
+            <a id="modalLinkedin" href="#" target="_blank" class="modal-social-link" aria-label="LinkedIn Profile">
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a id="modalEmail" href="#" class="modal-social-link" aria-label="Email">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </a>
+            <a id="modalTwitter" href="#" target="_blank" class="modal-social-link" aria-label="Twitter / X Profile">
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== -->
+  <!-- TOC TRIGGER           -->
+  <!-- ===================== -->
+
+  <button class="toc-trigger" onclick="toggleToc()" aria-label="Open table of contents" aria-expanded="false" id="tocTrigger">
+    Contents
+  </button>
+
+  <!-- ===================== -->
+  <!-- TOC DRAWER            -->
+  <!-- ===================== -->
+
+  <div class="toc-drawer" id="tocDrawer">
+    <div class="toc-backdrop" onclick="closeToc()"></div>
+    <div class="toc-panel" role="dialog" aria-label="Table of contents">
+      <button class="toc-close" onclick="closeToc()" aria-label="Close">✕</button>
+      <p class="toc-panel-label">On This Page</p>
+      <nav class="toc-panel-nav">
+        <a href="#about" class="toc-link" onclick="closeToc()">About IEEE Student Branch</a>
+        <a href="#why-join" class="toc-link" onclick="closeToc()">Why Join Us</a>
+        <a href="#events" class="toc-link" onclick="closeToc()">Events</a>
+        <a href="#team" class="toc-link" onclick="closeToc()">Office Bearers 2026</a>
+        <a href="#gallery" class="toc-link" onclick="closeToc()">Gallery</a>
+        <a href="#past-events" class="toc-link" onclick="closeToc()">Past Events</a>
+        <a href="#contact" class="toc-link" onclick="closeToc()">Contact Us</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ===================== -->
+  <!-- JAVASCRIPT            -->
+  <!-- ===================== -->
+
+  <script>
+
+    /* Accordion */
+
+    function toggleAccordion() {
+      const content = document.getElementById('accordionContent');
+      const trigger = document.querySelector('.accordion-trigger');
+      const isHidden = content.classList.toggle('hidden');
+      trigger.setAttribute('aria-expanded', String(!isHidden));
+    }
+
+    /* Member Data */
+
+    const memberData = [
+      {
+        name: "Prof. (Dr.) Dhruva Ghai",
+        designation: "Advisor",
+        memberId: "12345679",
+        image: "assets/images/team-1.jpg",
+        quote: "Guiding the next generation of engineers to build technology that impacts humanity positively.",
+        linkedin: "https://linkedin.com",
+        email: "mailto:coordinator@example.edu",
+        twitter: "https://twitter.com"
+      },
+      {
+        name: "Placeholder Patel",
+        designation: "Branch Counselor",
+        memberId: "12345678",
+        image: "assets/images/team-2.jpg",
+        quote: "It works on my machine.",
+        linkedin: "https://linkedin.com",
+        email: "mailto:counselor@example.edu",
+        twitter: "https://twitter.com"
+      },
+      {
+        name: "Aaditya Sinha",
+        designation: "Chairperson",
+        memberId: "102182304",
+        image: "",
+        quote: "It works on my machine.",
+        linkedin: "https://linkedin.com",
+        email: "mailto:aditya205sinha@gmail.com",
+        twitter: "https://twitter.com"
+      },
+      {
+        name: "Goli Shregna",
+        designation: "Vice-Chairperson",
+        memberId: "102182256",
+        image: "Goli_Shregna.jpeg",
+        quote: "It works on my machine.",
+        linkedin: "https://linkedin.com",
+        email: "mailto:reddy171317@gmail.com",
+        twitter: "https://twitter.com"
+      },
+      {
+        name: "Sheikh Shamim",
+        designation: "Treasurer",
+        memberId: "102192959",
+        image: "Sheikh_Shamim.jpeg",
+        quote: "It works on my machine.",
+        linkedin: "https://linkedin.com",
+        email: "mailto:sheikhshamim5490@gmail.com",
+        twitter: "https://twitter.com"
+      },
+      {
+        name: "Vishwakarma Babitha",
+        designation: "Secretary",
+        memberId: "102182389",
+        image: "Babitha_Vishwakarma",
+        quote: "It works on my machine.",
+        linkedin: "https://linkedin.com",
+        email: "mailto:vbandana663@gmail.com",
+        twitter: "https://twitter.com"
+      },
+      {
+        name: "Saakshi Patel",
+        designation: "Technical Committee Member",
+        memberId: "102182514",
+        image: "Sakshi_Patel.jpeg",
+        quote: "It works on my machine.",
+        linkedin: "https://linkedin.com",
+        email: "mailto:sassypatel2005@gmail.com",
+        twitter: "https://twitter.com"
+      },
+      {
+        name: "Godepally Naveen",
+        designation: "Photography",
+        memberId: "102182438",
+        image: "Godepally_Naveen.jpeg",
+        quote: "It works on my machine.",
+        linkedin: "https://linkedin.com",
+        email: "mailto:naveenyadav918226@gmail.com",
+        twitter: "https://twitter.com"
+      },
+      {
+        name: "Jay Agrawal",
+        designation: "Social Media Committee",
+        memberId: "102179544",
+        image: "Jay_Agrawal.jpeg",
+        quote: "It works on my machine.",
+        linkedin: "https://linkedin.com",
+        email: "mailto:agrawalvirendra07@gmail.com",
+        twitter: "https://twitter.com"
+      },
+      {
+        name: "Vedant Dhangar",
+        designation: "Web Committee Member",
+        memberId: "102182342",
+        image: "Vedant_Dhangar.jpeg",
+        quote: "It works on my machine.",
+        linkedin: "https://linkedin.com",
+        email: "mailto:enggvedantdhangar@gmail.com",
+        twitter: "https://twitter.com"
+      },
+      {
+        name: "Ranjana Patel",
+        designation: "Social Media Committee",
+        memberId: "102182475",
+        image: "Ranjana_Patel.jpeg",
+        quote: "It works on my machine.",
+        linkedin: "https://linkedin.com",
+        email: "mailto:kotharibhumika0@gmail.com",
+        twitter: "https://twitter.com"
+      },
+      {
+        name: "Sooraj Pandey",
+        designation: "Web Committee Member",
+        memberId: "102182452",
+        image: "assets/images/team-4.jpg",
+        quote: "It works on my machine.",
+        linkedin: "https://linkedin.com",
+        email: "mailto:soorajpandey929@gmail.com",
+        twitter: "https://twitter.com"
+      },
+      {
+        name: "Apoorva Tiwari",
+        designation: "Web Committee Member",
+        memberId: "102179355",
+        image: "Apoorva_Tiwari.jpeg",
+        quote: "It works on my machine.",
+        linkedin: "https://linkedin.com",
+        email: "mailto:apoorva11tiwari@gmail.com",
+        twitter: "https://twitter.com"
+      },
+      {
+        name: "Arman Chandravanshi",
+        designation: "Technical Committee Member",
+        memberId: "102193073",
+        image: "Arman_Chandravanshi.jpeg",
+        quote: "It works on my machine.",
+        linkedin: "https://linkedin.com",
+        email: "mailto:armanachandravanshi@gmail.com",
+        twitter: "https://twitter.com"
+      }
+
+    ];
+
+    /* TOC Drawer */
+
+    function toggleToc() {
+      const drawer  = document.getElementById('tocDrawer');
+      const trigger = document.getElementById('tocTrigger');
+      const isOpen  = drawer.classList.toggle('is-open');
+      trigger.classList.toggle('is-open', isOpen);
+      trigger.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    function closeToc() {
+      const drawer  = document.getElementById('tocDrawer');
+      const trigger = document.getElementById('tocTrigger');
+      drawer.classList.remove('is-open');
+      trigger.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeToc();
+    });
+
+    /* Modal */
+
+    function openTeamModal(index) {
+      const member = memberData[index];
+      if (!member) return;
+
+      document.getElementById('modalImage').src         = member.image;
+      document.getElementById('modalImage').alt         = member.name;
+      document.getElementById('modalName').textContent  = member.name;
+      document.getElementById('modalDesignation').textContent = member.designation;
+      document.getElementById('modalMemberId').textContent    = member.memberId;
+      document.getElementById('modalQuote').textContent       = member.quote;
+      document.getElementById('modalLinkedin').href  = member.linkedin;
+      document.getElementById('modalEmail').href     = member.email;
+      document.getElementById('modalTwitter').href   = member.twitter;
+
+      const modal = document.getElementById('teamModal');
+      modal.classList.add('is-visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeTeamModal() {
+      const modal = document.getElementById('teamModal');
+      modal.classList.remove('is-visible');
+      document.body.style.overflow = '';
+    }
+
+    /* Init */
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const content = document.getElementById('accordionContent');
+      if (content) content.classList.add('hidden');
+
+      const modal = document.getElementById('teamModal');
+      if (modal) {
+        modal.addEventListener('click', function (e) {
+          if (e.target === modal) closeTeamModal();
+        });
+      }
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal && modal.classList.contains('is-visible')) {
+          closeTeamModal();
+        }
+      });
+    });
+
+  </script>
+
+</body>
+</html>
